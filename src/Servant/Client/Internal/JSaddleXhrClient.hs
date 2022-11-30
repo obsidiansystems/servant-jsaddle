@@ -120,9 +120,6 @@ instance Alt ClientM where
 
 instance RunClient ClientM where
   throwClientError = throwError
-  runRequest r = do
-    d <- ClientM askDOM
-    performRequest d r
 
 runClientM :: ClientM a -> ClientEnv -> DOM (Either ClientError a)
 runClientM cm env = runExceptT $ flip runReaderT env $ fromClientM cm
